@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AImonk lab - Poomagal</title>
+    <style>
+        .image-container {
+            max-width: 500px;
+            margin-top: 20px;
+        }
+        .button-container {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body style="background-color: gray;">
+    <h2 style="color: blueviolet;">AImonk lab - Poomagal</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="image" id="imageInput" accept="image/*" required>
+        <div class="button-container">
+            <button type="button" onclick="processImage()">Process Image</button>
+        </div>
+    </form>
+    
+    <h3>Uploaded Image:</h3>
+    <div class="image-container">
+        <img id="uploadedImage" src="#" alt="Uploaded Image" style="display:none; max-width:100%;" />
+    </div>
+
+    <h3>Processed Image:</h3>
+    <div class="image-container">
+        <img id="processedImage" src="#" alt="Processed Image" style="display:none; max-width:100%;" />
+    </div>
+
+    <script>
+        const uploadForm = document.getElementById('uploadForm');
+        const imageInput = document.getElementById('imageInput');
+        const uploadedImage = document.getElementById('uploadedImage');
+        const processedImage = document.getElementById('processedImage');
+
+        // Display uploaded image
+        imageInput.addEventListener('change', (event) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedImage.src = e.target.result;
+                uploadedImage.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+
+        // Function to process the image when button is clicked
+        function processImage() {
+            const formData = new FormData(uploadForm);
+            fetch('/upload-image', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display processed image
+                const processedURL = data.p_image;
+                processedImage.src = processedURL;
+                processedImage.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error processing image:', error);
+            });
+        }
+    </script>
+</body>
+</html>
