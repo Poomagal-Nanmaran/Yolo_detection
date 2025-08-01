@@ -1,7 +1,7 @@
 # Yolo_detection
 
 Follow steps below to upload image in UI and display processed image:
-1.	Unzip the AImonk_poomagal.zip
+1.	Unzip the Yolo_detection.zip
 2.	Navigate to AI folder, do bash build_docker.sh to build AI docker image.
 3.	Do bash run_ai.sh to start ai docker.
 4.	In new CLI, get the gateway ip of docker network with command “docker inspect -f '{{.NetworkSettings.Gateway}}' ai”
