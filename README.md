@@ -1,6 +1,5 @@
-# AIMonk
+# Yolo_detection
 
-AIMonk Technical Assessment -Poomagal Nanmaran
 Follow steps below to upload image in UI and display processed image:
 1.	Unzip the AImonk_poomagal.zip
 2.	Navigate to AI folder, do bash build_docker.sh to build AI docker image.
